@@ -1,226 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anas | Software Engineering Portfolio</title>
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --card-bg: #161b22;
-            --border: #30363d;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anas Alissa — Backend & Systems Engineer</title>
+<meta name="description" content="Anas Alissa — Computer Science graduate, 42 Irbid cadet. Backend, systems, and AI-integration engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12141a;
+    --bg-panel:#1a1d25;
+    --bg-panel-2:#16181f;
+    --text:#e7e4dc;
+    --text-dim:#8b8f9c;
+    --text-faint:#5a5e6b;
+    --amber:#e8a33d;
+    --teal:#5fb3a3;
+    --border:#2a2e38;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--amber);color:#12141a;}
+  a{color:var(--teal);text-decoration:none;border-bottom:1px solid transparent;}
+  a:hover{border-bottom-color:var(--teal);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        }
+  /* ---------- Top nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,20,26,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:840px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .nav-prompt{
+    font-family:var(--mono);font-size:14px;color:var(--amber);
+    white-space:nowrap;
+  }
+  .nav-links{display:flex;gap:20px;font-family:var(--mono);font-size:13px;flex-wrap:wrap;}
+  .nav-links a{color:var(--text-dim);border-bottom:none;}
+  .nav-links a:hover{color:var(--amber);border-bottom:none;}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+  /* ---------- Hero / terminal ---------- */
+  .hero{max-width:840px;margin:0 auto;padding:64px 24px 40px;}
+  .term{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 14px;border-bottom:1px solid var(--border);
+    background:var(--bg-panel-2);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;background:#3a3e4a;}
+  .term-title{
+    font-family:var(--mono);font-size:12px;color:var(--text-faint);
+    margin-left:8px;
+  }
+  .term-body{
+    padding:24px;font-family:var(--mono);font-size:14px;
+    min-height:190px;
+  }
+  .line{margin-bottom:14px;}
+  .prompt{color:var(--teal);}
+  .cmd{color:var(--text);}
+  .out{color:var(--text-dim);margin-top:4px;padding-left:0;}
+  .out .hl{color:var(--amber);}
+  .cursor{
+    display:inline-block;width:8px;height:16px;background:var(--amber);
+    vertical-align:text-bottom;margin-left:2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+  }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  /* ---------- Sections (man-page style) ---------- */
+  .section{max-width:840px;margin:0 auto;padding:56px 24px;}
+  .section + .section{border-top:1px solid var(--border);}
+  .sec-head{
+    display:flex;align-items:baseline;gap:12px;margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .sec-tag{
+    font-family:var(--mono);font-size:13px;color:var(--amber);
+    letter-spacing:0.04em;
+  }
+  .sec-title{
+    font-family:var(--mono);font-size:22px;font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .sec-sub{
+    font-family:var(--sans);color:var(--text-dim);font-size:14.5px;
+    margin-top:6px;max-width:60ch;
+  }
 
-        /* --- Hero Section --- */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            border-bottom: 1px solid var(--border);
-        }
+  .card{
+    background:var(--bg-panel);border:1px solid var(--border);
+    border-radius:6px;padding:20px 22px;margin-bottom:16px;
+    transition:border-color 0.15s ease;
+  }
+  .card:hover{border-color:var(--text-faint);}
+  .card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;margin-bottom:10px;
+  }
+  .card-cmd{
+    font-family:var(--mono);font-size:14.5px;color:var(--text);font-weight:500;
+  }
+  .card-cmd .prompt{margin-right:6px;}
+  .card-tag{
+    font-family:var(--mono);font-size:11px;color:var(--text-faint);
+    border:1px solid var(--border);border-radius:4px;padding:2px 8px;
+    white-space:nowrap;
+  }
+  .card ul{list-style:none;margin-top:4px;}
+  .card li{
+    position:relative;padding-left:18px;margin-bottom:6px;
+    color:var(--text-dim);font-size:14.5px;
+  }
+  .card li::before{
+    content:"›";position:absolute;left:0;color:var(--teal);
+  }
+  .card-links{margin-top:12px;display:flex;gap:16px;font-family:var(--mono);font-size:12.5px;}
 
-        h1 {
-            font-size: 3rem;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
+  .roadmap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .rm-item{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
+    padding:14px 16px;font-family:var(--mono);font-size:13.5px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .rm-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+  @media (max-width:560px){.roadmap-grid{grid-template-columns:1fr;}}
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
+  .contact-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  }
+  .contact-item{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;
+    padding:16px 18px;
+  }
+  .contact-item .k{font-family:var(--mono);font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;}
+  .contact-item .v{font-family:var(--mono);font-size:14px;margin-top:4px;}
+  @media (max-width:560px){.contact-grid{grid-template-columns:1fr;}}
 
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: #ffffff;
-        }
-
-        .btn-primary:hover {
-            background-color: #3182ce;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-        }
-
-        /* --- Sections General --- */
-        section {
-            padding: 80px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #ffffff;
-        }
-
-        /* --- Grid for Projects --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .tech-focus {
-            font-size: 0.9rem;
-            background-color: rgba(88, 166, 255, 0.1);
-            color: var(--accent);
-            padding: 5px 10px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        .card-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-right: 15px;
-        }
-
-        .card-links a:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-    </style>
+  footer{
+    max-width:840px;margin:0 auto;padding:32px 24px 56px;
+    font-family:var(--mono);font-size:12px;color:var(--text-faint);
+    text-align:center;
+  }
+</style>
 </head>
 <body>
 
-    <section id="hero" class="container">
-        <h1>Anas | Software Engineering Student & CS Graduate</h1>
-        <p class="subtitle">Bridging low-level system programming with practical application development. Currently building foundational systems at 42 Irbid and deploying scalable solutions.</p>
-        <div class="cta-buttons">
-            <a href="#core-systems" class="btn btn-primary">View Core Projects</a>
-            <a href="#applications" class="btn btn-secondary">View Applications</a>
-        </div>
-    </section>
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-prompt">~/anas $</span>
+    <div class="nav-links">
+      <a href="#core42">42_core</a>
+      <a href="#ai-projects">ai_projects</a>
+      <a href="#roadmap">roadmap</a>
+      <a href="#contact">contact</a>
+      <a href="https://github.com/anaselissa" target="_blank" rel="noopener">github</a>
+    </div>
+  </div>
+</nav>
 
-    <section id="about" class="container">
-        <h2>About Me</h2>
-        <p>A Computer Science graduate from Balqa Applied University and an active student at the 42 Irbid coding school. My engineering philosophy revolves around understanding software "under the hood". I focus on mastering C/C++ memory management, data structures, and algorithms, while actively building cross-platform applications using Dart/Flutter and JavaScript.</p>
-    </section>
+<header class="hero">
+  <div class="term">
+    <div class="term-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="term-title">anas@42irbid: ~</span>
+    </div>
+    <div class="term-body" id="termBody">
+      <div class="line"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+      <div class="out">Anas Alissa — <span class="hl">Backend &amp; Systems Engineer</span></div>
+      <div class="line" style="margin-top:18px;"><span class="prompt">$</span> <span class="cmd">cat about.txt</span></div>
+      <div class="out">CS graduate &amp; Software Engineering Cadet at <span class="hl">42 Irbid</span>.<br>
+      Bridging low-level systems programming (C) with backend<br>
+      architecture (Python, PostgreSQL) and AI-assisted workflows<span class="cursor"></span></div>
+    </div>
+  </div>
+</header>
 
-    <section id="core-systems" class="container">
-        <h2>Core Systems (42 Curriculum)</h2>
-        <div class="project-grid">
-            <div class="card">
-                <h3>Libft</h3>
-                <p>Re-implementation of standard C library functions (libc) from scratch.</p>
-                <div class="tech-focus">Byte-level memory, Pointers, Memory leak prevention</div>
-                <div class="card-links">
-                    <a href="#">[رابط مستودع libft]</a>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h3>get_next_line & push_swap</h3>
-                <p>Status: Upcoming / In Progress.</p>
-                <div class="tech-focus">File descriptors, Algorithmic sorting optimization</div>
-            </div>
-        </div>
-    </section>
+<section class="section" id="core42">
+  <div class="sec-head">
+    <span class="sec-tag">MAN(1)</span>
+    <h2 class="sec-title">42_CORE</h2>
+  </div>
+  <p class="sec-sub" style="margin-bottom:24px;">Low-level systems and algorithms — the 42 common core. No lectures, no frameworks: peer-reviewed, memory-exact C.</p>
 
-    <section id="applications" class="container">
-        <h2>Applied Applications</h2>
-        <div class="project-grid">
-            <div class="card">
-                <h3>Riayatkom (رعايتكم)</h3>
-                <p>A humanitarian coordination platform built to manage real-time resource mapping and community support. (Graduation Project)</p>
-                <div class="tech-focus">Flutter (Dart), JavaScript Backend</div>
-                <div class="card-links">
-                    <a href="#">[رابط Frontend]</a>
-                    <a href="#">[رابط Backend]</a>
-                </div>
-            </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./push_swap</span>
+      <span class="card-tag">C</span>
+    </div>
+    <ul><li>Engineered a highly optimized stack-based sorting algorithm under strict operation-count constraints.</li></ul>
+    <div class="card-links"><a href="https://github.com/anaselissa/42-c_project-push_swap" target="_blank" rel="noopener">source →</a></div>
+  </div>
 
-            <div class="card">
-                <h3>MAZA Overclock Hackathon</h3>
-                <p>24-hour software engineering challenge focusing on rapid prototyping and architecture design.</p>
-                <div class="tech-focus">Rapid Prototyping, Architecture Design</div>
-                <div class="card-links">
-                    <a href="#">[رابط مستودع الهاكاثون]</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./get_next_line</span>
+      <span class="card-tag">C</span>
+    </div>
+    <ul><li>Built a memory-efficient static library for line-by-line file reading with manual buffer management.</li></ul>
+    <div class="card-links"><a href="https://github.com/anaselissa/42-Get_Next_Line" target="_blank" rel="noopener">source →</a></div>
+  </div>
 
-    <footer>
-        <p>&copy; 2026 Anas. Built with HTML & CSS.</p>
-    </footer>
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./ft_printf</span>
+      <span class="card-tag">C</span>
+    </div>
+    <ul><li>Re-implemented variadic-argument formatted output from scratch, matching libc's printf behavior.</li></ul>
+    <div class="card-links"><a href="https://github.com/anaselissa/42-c_project-printf" target="_blank" rel="noopener">source →</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./libft</span>
+      <span class="card-tag">C</span>
+    </div>
+    <ul><li>Re-implemented the standard C library from scratch — byte-level memory operations, string handling, and linked lists.</li></ul>
+    <div class="card-links"><a href="https://github.com/anaselissa/42-c_project-libft" target="_blank" rel="noopener">source →</a></div>
+  </div>
+</section>
+
+<section class="section" id="ai-projects">
+  <div class="sec-head">
+    <span class="sec-tag">MAN(1)</span>
+    <h2 class="sec-title">AI_INTEGRATION</h2>
+  </div>
+  <p class="sec-sub" style="margin-bottom:24px;">Real products, built by directing AI tools with intent — owning the architecture, reviewing every output, accountable for what ships.</p>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./riayatkom --lead</span>
+      <span class="card-tag">Graduation Project</span>
+    </div>
+    <ul>
+      <li>Led a 6-member team as Database Architect &amp; Technical Project Lead — task allocation and delivery tracked via Gantt chart.</li>
+      <li>Designed the full PostgreSQL schema (via Supabase): ERD, data dictionaries, and core tables (users, volunteers, service_requests, medical_records).</li>
+      <li>Directed AI-assisted implementation of the security layer — Row Level Security policies and JWT authentication for multi-role access.</li>
+      <li>Architected a zero-cost hosting stack across Supabase, Render, and Vercel for a fully live demo.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./42_hackathon --24h</span>
+      <span class="card-tag">Transportation Platform</span>
+    </div>
+    <ul><li>Led rapid prototyping under a 24-hour constraint, directing system architecture decisions while leveraging AI tools to accelerate implementation.</li></ul>
+    <div class="card-links"><a href="https://github.com/anaselissa/42-anas-hakathon" target="_blank" rel="noopener">source →</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./jwaaha-lebne --admin</span>
+      <span class="card-tag">Live · Production</span>
+    </div>
+    <ul>
+      <li>Built a zero-cost, serverless e-commerce data platform for a real local business.</li>
+      <li>Designed a full CRUD admin panel — categories, products, variants, pricing — persisted via the GitHub API as a lightweight JSON-based backend.</li>
+      <li>Directed AI-assisted development while owning every architecture and data-structure decision. 16+ live products across 3 categories, zero hosting cost.</li>
+    </ul>
+    <div class="card-links">
+      <a href="https://anaselissa.github.io/jawaha-lebne/" target="_blank" rel="noopener">live site →</a>
+      <a href="https://github.com/anaselissa/jawaha-lebne" target="_blank" rel="noopener">source →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <span class="card-cmd"><span class="prompt">$</span> ./jwaaha-labaneh --odoo</span>
+      <span class="card-tag">ERP</span>
+    </div>
+    <ul><li>Configured Odoo ERP backend modules and business logic for e-commerce operations — product data structure and workflow customization.</li></ul>
+    <div class="card-links"><a href="https://jwaaha-labaneh.odoo.com/" target="_blank" rel="noopener">live site →</a></div>
+  </div>
+</section>
+
+<section class="section" id="roadmap">
+  <div class="sec-head">
+    <span class="sec-tag">MAN(1)</span>
+    <h2 class="sec-title">ROADMAP</h2>
+  </div>
+  <p class="sec-sub" style="margin-bottom:24px;">Currently building toward — in progress, not claimed.</p>
+  <div class="roadmap-grid">
+    <div class="rm-item"><span class="rm-dot"></span> FastAPI — production REST APIs</div>
+    <div class="rm-item"><span class="rm-dot"></span> Docker — containerized deployment</div>
+    <div class="rm-item"><span class="rm-dot"></span> PostgreSQL — direct schema &amp; admin</div>
+    <div class="rm-item"><span class="rm-dot"></span> LangChain / RAG — grounded LLM apps</div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="sec-head">
+    <span class="sec-tag">MAN(1)</span>
+    <h2 class="sec-title">SEE_ALSO</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="k">GitHub</div>
+      <div class="v"><a href="https://github.com/anaselissa" target="_blank" rel="noopener">github.com/anaselissa</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="k">LinkedIn</div>
+      <div class="v"><a href="https://www.linkedin.com/in/anas-alissa" target="_blank" rel="noopener">in/anas-alissa</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="k">Email</div>
+      <div class="v"><a href="mailto:anselissa20@gmail.com">anselissa20@gmail.com</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="k">Location</div>
+      <div class="v">Irbid, Jordan</div>
+    </div>
+  </div>
+</section>
+
+<footer>anas alissa — built with C, patience, and a text editor.</footer>
 
 </body>
 </html>
